@@ -1,0 +1,50 @@
+﻿<div>
+    <div class="panel-body">
+        <div class="row row-tripControls">
+            <span class="col-xs-3">Airport Code or City Name</span>
+            <span class='col-xs-2'>Check In Date</span>
+            <span class='col-xs-2'>Check Out Date</span>
+            <span class='col-xs-2'>Number of Adults</span>
+        </div>
+
+        <div class="row row-tripControls">
+            <div class="col-xs-3">
+                <ng2-completer [(ngModel)]="selectedCity"
+                               [dataService]="cityService"
+                               [pause] ="100"
+                               [placeholder]="'Search Cities'"
+                               [minSearchLength]="3"
+                               [matchClass]="'match'"
+                               [autoMatch]="true" >
+                    
+                </ng2-completer>
+            </div>
+            <div class='col-xs-2'>
+                <div class="form-group">
+                    <div class='input-group date'>
+                        <input type='date' class="form-control" placeholder="Check In Date" [(ngModel)]="request.checkInDate" />
+                    </div>
+                </div>
+            </div>
+            <div class='col-xs-2'>
+                <div class="form-group">
+                    <div class='input-group date'>
+                        <input type='date' class="form-control" placeholder="Check Out Date" [(ngModel)]="request.checkOutDate" />
+                    </div>
+                </div>
+            </div>
+            <div class='col-xs-2'>
+                <div class="form-group">
+                    <div class='input-group date'>
+                        <input type='number' class="form-control" placeholder="Number of Adults" min="1" [(ngModel)]="request.numberOfAdults" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-success" (click)="search()">Search</button>
+        <!--this one reload the page-->
+        <!--<a href="/list?searchId={{request.id}}">Go to List</a>-->
+        <!--<a [routerLink]="['/list']" [queryParams]="{searchId: request.id}" routerLinkActive="active">Go to List</a>-->
+
+    </div>
+</div>

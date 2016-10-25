@@ -1,0 +1,7 @@
+﻿{
+  "port": 81, 
+  "_files": "./src/**/*.{js, html, css}",
+  "_server": { "baseDir": "./app" },
+  "https": false,
+  "browser": [ "chrome" ]
+}

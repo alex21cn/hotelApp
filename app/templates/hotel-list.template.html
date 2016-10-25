@@ -1,0 +1,22 @@
+﻿<div class="form-control">
+    <div *ngFor="let hotel of hotels" class="row" (click)="selectHotel(hotel)">
+        <div class="col-md-3">
+            <img [src]="hotel.image" style="width: 100px; height:100px"/>
+        </div>
+        <div class="col-md-3">
+            <a [routerLink]="['/detail', hotel.id]" [queryParams]="{searchId:  searchId}" routerLinkActive="active"><h4>{{hotel.name}}</h4></a>
+            <span>{{hotel.address}}</span>
+        </div>
+        <div class="col-md-3">
+            <span>{{hotel.description}}</span>
+        </div>
+        <div class="col-md-2">
+            <span>{{hotel.price | currency:'USD':true:'1.2-2'}}</span>
+        </div>
+
+    </div>
+
+    <button (click)="goBack()">Go Back to Search</button>
+    <button (click)="gotoDetail()">Go to Details</button>
+</div>
+
