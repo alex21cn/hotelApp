@@ -1,15 +1,20 @@
 ﻿{
   "compilerOptions": {
-    "target": "es5",
-    "module": "es2015",
+    "target": "es6",
+    "module": "es6",
+    "lib": [ "es6", "dom" ],
     "moduleResolution": "node",
+    "outDir": "./publish",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": false,
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
-    "types": []
+    "types": [],
+    "typeRoots": [
+      "./node_modules/@types"
+    ]
   },
   "watch": true,
   "angularCompilerOptions": {

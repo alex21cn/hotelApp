@@ -39,6 +39,9 @@
     <Content Include="app\templates\hotel-list.template.html" />
     <Content Include="app\templates\city-search.template.html" />
     <Content Include="app\templates\hotel-search.template.html" />
+    <Content Include="asset\css\app.component.css" />
+    <Content Include="asset\css\app.theme.scss" />
+    <Content Include="asset\css\style.css" />
     <Content Include="bs-config.json" />
     <Content Include="index.html" />
     <Content Include="tsconfig-aot.json" />
