@@ -1,64 +1,37 @@
-﻿<div>
-    <div>
-        <!--<div class="row row-tripControls">
-            <span class="col-xs-3">Airport Code or City Name</span>
-            <span class='col-xs-2'>Check In Date</span>
-            <span class='col-xs-2'>Check Out Date</span>
-            <span class='col-xs-2'>Number of Adults</span>
-        </div>-->
+﻿
+<ng2-completer [(ngModel)]="selectedCity"
+               [dataService]="cityService"
+               [pause]="100"
+               [placeholder]="'Search Cities'"
+               [minSearchLength]="3"
+               [matchClass]="'match'"
+               [autoMatch]="true" md-input>
 
-        <div class="row row-tripControls">
-            <div class="col-xs-3">
-                <ng2-completer [(ngModel)]="selectedCity"
-                               [dataService]="cityService"
-                               [pause]="100"
-                               [placeholder]="'Search Cities'"
-                               [minSearchLength]="3"
-                               [matchClass]="'match'"
-                               [autoMatch]="true" md-input>
-
-                </ng2-completer>
-            </div>
-            <div class='col-xs-2'>
-                <div class="form-group">
-                    <div class='input-group date'>
-                        <input type='date' class="form-control" placeholder="Check In Date" [(ngModel)]="request.checkInDate" />
-                    </div>
-                </div>
-            </div>
-            <div class='col-xs-2'>
-                <div class="form-group">
-                    <div class='input-group date'>
-                        <input type='date' class="form-control" placeholder="Check Out Date" [(ngModel)]="request.checkOutDate" />
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <input type='number' class="form-control" placeholder="Number of Rooms" min="1" max="4" [(ngModel)]="numberOfRooms" (click)="AddOrRemoveRoom(numberOfRooms)" />
-            </div>
-            <div class='col-md-4'>
-                <div *ngFor="let room of request.rooms; let i = index">
-                    <div class="form-group">
-                        <label class="row">Room {{i + 1}}</label>
-                        <div class="room">
-                            <span>Number Of Adults</span>
-                            <input type='number' class="form-control" placeholder="Number of Adults" min="1" max="2" [(ngModel)]="room.numberOfAdults" />
-                            <span>Number Of Children</span>
-                            <input type='number' class="form-control" placeholder="Number of Child" min="0" max="2" [(ngModel)]="room.numberOfChildren" (click)="AddOrRemoveChild(room, room.numberOfChildren)" />
-                        </div>
-                        <div *ngFor="let j = index of room.childAges">
-                            <label>Child {{j + 1}} Age</label>
-                            <input type='number' class="form-control" placeholder="Age of Child {{j+1}}" min="1" max="12" [(ngModel)]="room.childAges[j]" />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button md-raised-button color="primary" (click)="search()">Search</button>
-
-        <!--this one reload the page-->
-        <!--<a href="/list?searchId={{request.id}}">Go to List</a>-->
-        <!--<a [routerLink]="['/list']" [queryParams]="{searchId: request.id}" routerLinkActive="active">Go to List</a>-->
-
-    </div>
+</ng2-completer>
+<md-input type='date' placeholder="Check In Date" [(ngModel)]="request.checkInDate"></md-input>
+<md-input type='date' placeholder="Check Out Date" [(ngModel)]="request.checkOutDate"></md-input>
+<md-input type='number' placeholder="Number of Rooms" min="1" max="4" [(ngModel)]="numberOfRooms" (click)="AddOrRemoveRoom(numberOfRooms)"></md-input>
+<md-card class="app-input-section" *ngFor="let room of request.rooms; let i = index">
+    <label>Room {{i + 1}}</label>
+    <md-input type='number' align="end" placeholder="Number of Adults" min="1" max="4" [(ngModel)]="room.numberOfAdults"></md-input>
+    <md-input type='number' align="end" placeholder="Number of Child" min="0" max="4" [(ngModel)]="room.numberOfChildren" (click)="AddOrRemoveChild(room, room.numberOfChildren)"></md-input>
+    <span *ngFor="let j = index of room.childAges">
+        <md-input type='number' align="end" placeholder="Age of Child {{j+1}}" min="0" max="17" [(ngModel)]="room.childAges[j]"></md-input>
+    </span>
+</md-card>
+<div align="end">
+    <button md-raised-button color="primary" (click)="search()">Search</button>
 </div>
+
+<!--this one reload the page-->
+<!--<a href="/list?searchId={{request.id}}">Go to List</a>-->
+<!--<a [routerLink]="['/list']" [queryParams]="{searchId: request.id}" routerLinkActive="active">Go to List</a>-->
+<style>
+    md-input[type=date] {
+        width: 200px;
+    }    
+    
+    md-input[type=number] {
+        width: 150px;
+    }
+</style>
