@@ -19,6 +19,7 @@ export class HotelSearchComponent implements OnInit {
     private cityService: CompleterData;
     private request: SearchRequest;
     private selectedCity: string;
+    private numberOfRooms: number;
     constructor(private router: Router, private service: HotelService, private user: UserService, private completerService: CompleterService) {
         this.service.getCities().then(cities => this.cityService = completerService.local(cities, "name,country,airportCode", "name,country,airportCode"));
     }
@@ -29,12 +30,27 @@ export class HotelSearchComponent implements OnInit {
         this.request.city = city;
         this.request.checkInDate = new Date();
         this.request.checkOutDate = new Date();
+        this.numberOfRooms = 1;
+    }
+
+    AddOrRemoveRoom(numberOfRooms: number): void {
+        if (numberOfRooms < this.request.rooms.length)
+            this.request.rooms.pop();
+        if (numberOfRooms > this.request.rooms.length)
+            this.request.rooms.push({ numberOfAdults: 2, numberOfChildren: 0, childAges: [] });
+    }
+
+    AddOrRemoveChild(room: RequestRoom, numberOfChildren: number): void {
+        if (numberOfChildren < room.childAges.length)
+            room.childAges.pop();
+        if (numberOfChildren > room.childAges.length)
+            room.childAges.push(6);
     }
 
     search(): void {
         this.request.id = Date.now();
-        //this.request.city = this.selectedCity.name;
-        //this.request.country = this.selectedCity.country;
+        //this.request.city = this.selectedCity;
+        //this.request.city.country = this.selectedCity;
         this.user.setSearch(this.request);
         let navigationExtras: NavigationExtras = {
             queryParams: { "searchId": this.request.id }
@@ -43,4 +59,5 @@ export class HotelSearchComponent implements OnInit {
         //let link = ["/hotels", this.request.id];
         this.router.navigate(["/list"], navigationExtras);
     }
+
 }

@@ -6,3 +6,6 @@
 /aot
 /node_modules
 /typings
+/obj
+*.js
+*.map

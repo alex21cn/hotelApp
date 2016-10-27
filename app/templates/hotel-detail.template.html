@@ -1,5 +1,31 @@
 ﻿<div><span>Detail</span></div>
 <div *ngIf="hotel">
-    <h4>{{hotel.name}}</h4>
-    <button (click)="goBack()">Go Back</button>
+    <div class="row">
+        <img src="http://www.hotelbeds.com/giata/small/{{hotel.images[0].path}}" style="margin:auto;">
+    </div>
+    <div class="row">
+        <label class="col-md-3">Hotel Name</label>
+        <h4 class="col-md-6">{{hotel.name.content}}</h4>
+    </div>
+    <div class="row">
+        <label class="col-md-3">Hotel Address</label>
+        <span class="col-md-6">{{hotel.address.content}} {{hotel.city.content}} {{hotel.postalCode}}</span>
+    </div>
+    <div class="row">
+        <label class="col-md-3">Hotel Description</label>
+        <span class="col-md-6">{{hotel.description.content}}</span>
+    </div>
+    <div class="row" *ngFor="let room of hotel.rooms">
+        <div class="row">
+            <span class="col-md-3">Room Type</span>
+            <span class="col-md-6">{{room.description}}</span>
+        </div>
+    </div>
+    <div class="row" *ngFor="let facility of hotel.facilities">
+        <div class="col-md-3">Facilities</div>
+        <div class="col-md-6">
+            <div class="row"><span>{{facility.description.content}}</span></div>
+        </div>
+    </div>
 </div>
+<button (click)="goBack()">Go Back</button>
