@@ -1,5 +1,7 @@
 ﻿import { Component, OnInit } from "@angular/core";
 import { Router, NavigationExtras } from "@angular/router";
+import { Observable }         from "rxjs/Observable";
+import * as _ from "lodash";
 import { HotelService } from "../services/hotel.service";
 import { UserService } from "../services/user.service";
 import { City } from "../classes/city.class";
@@ -18,8 +20,12 @@ export class HotelSearchComponent implements OnInit {
     private cities: City[];
     private cityService: CompleterData;
     private request: SearchRequest;
+    private observableRequest: Observable<SearchRequest>;
     private selectedCity: string;
     private numberOfRooms: number;
+    private totalNumberOfAdults: number;
+    private totalNumberOfChildren: number;
+
     constructor(private router: Router, private service: HotelService, private user: UserService, private completerService: CompleterService) {
         this.service.getCities().then(cities => this.cityService = completerService.local(cities, "name,country,airportCode", "name,country,airportCode"));
     }
@@ -31,6 +37,13 @@ export class HotelSearchComponent implements OnInit {
         this.request.checkInDate = new Date();
         this.request.checkOutDate = new Date();
         this.numberOfRooms = 1;
+        this.observableRequest = new Observable(o => o.next(this.request));
+        this.observableRequest.subscribe(value => {
+            this.totalNumberOfAdults = _.sumBy(this.request.rooms, "numberOfAdults");
+            this.totalNumberOfChildren = _.sumBy(this.request.rooms, "numberOfChildren");
+            console.log(value);
+        });
+
     }
 
     AddOrRemoveRoom(numberOfRooms: number): void {
@@ -38,6 +51,7 @@ export class HotelSearchComponent implements OnInit {
             this.request.rooms.pop();
         if (numberOfRooms > this.request.rooms.length)
             this.request.rooms.push({ numberOfAdults: 2, numberOfChildren: 0, childAges: [] });
+        this.observableRequest.publish(this.request);
     }
 
     AddOrRemoveChild(room: RequestRoom, numberOfChildren: number): void {
