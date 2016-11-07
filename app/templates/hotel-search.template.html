@@ -9,14 +9,14 @@
 </ng2-completer>
 <md-input type='date' placeholder="Check In Date" [(ngModel)]="request.checkInDate"></md-input>
 <md-input type='date' placeholder="Check Out Date" [(ngModel)]="request.checkOutDate"></md-input>
-<md-input type='number' placeholder="Number of Rooms" min="1" max="4" [(ngModel)]="numberOfRooms" (click)="AddOrRemoveRoom(numberOfRooms)"></md-input>
+<md-input type='number' placeholder="Number of Rooms" min="1" max="4" [(ngModel)]="numberOfRooms" (click)="addOrRemoveRoom(numberOfRooms)"></md-input>
 <label>{{request.rooms.length}} Room{{request.rooms.length > 1? "s":""}},
 {{totalNumberOfAdults}} Adult{{totalNumberOfAdults > 1? "s":""}}
 {{totalNumberOfChildren > 0? (" ," + totalNumberOfChildren.toString() + (totalNumberOfChildren > 1? " Children":" Child")) : ""}}</label>
 <md-card class="app-input-section" *ngFor="let room of request.rooms; let i = index">
     <label>Room {{i + 1}}</label>
-    <md-input type='number' align="end" placeholder="Number of Adults" min="1" max="4" [(ngModel)]="room.numberOfAdults"></md-input>
-    <md-input type='number' align="end" placeholder="Number of Child" min="0" max="4" [(ngModel)]="room.numberOfChildren" (click)="AddOrRemoveChild(room, room.numberOfChildren)"></md-input>
+    <md-input type='number' align="end" placeholder="Number of Adults" min="1" max="4" [(ngModel)]="room.numberOfAdults" (change)="updateOccupancy()"></md-input>
+    <md-input type='number' align="end" placeholder="Number of Child" min="0" max="4" [(ngModel)]="room.numberOfChildren" (click)="addOrRemoveChild(room, room.numberOfChildren)"></md-input>
     <span *ngFor="let j = index of room.childAges">
         <md-input type='number' align="end" placeholder="Age of Child {{j+1}}" min="0" max="17" [(ngModel)]="room.childAges[j]"></md-input>
     </span>

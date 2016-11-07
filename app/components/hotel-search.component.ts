@@ -39,26 +39,31 @@ export class HotelSearchComponent implements OnInit {
         this.numberOfRooms = 1;
         this.observableRequest = new Observable(o => o.next(this.request));
         this.observableRequest.subscribe(value => {
-            this.totalNumberOfAdults = _.sumBy(this.request.rooms, "numberOfAdults");
-            this.totalNumberOfChildren = _.sumBy(this.request.rooms, "numberOfChildren");
-            console.log(value);
+            this.updateOccupancy();
         });
 
     }
 
-    AddOrRemoveRoom(numberOfRooms: number): void {
+    addOrRemoveRoom(numberOfRooms: number): void {
         if (numberOfRooms < this.request.rooms.length)
             this.request.rooms.pop();
         if (numberOfRooms > this.request.rooms.length)
             this.request.rooms.push({ numberOfAdults: 2, numberOfChildren: 0, childAges: [] });
-        this.observableRequest.publish(this.request);
+        this.updateOccupancy();
+        //this.observableRequest.publish(this.request);
     }
 
-    AddOrRemoveChild(room: RequestRoom, numberOfChildren: number): void {
+    addOrRemoveChild(room: RequestRoom, numberOfChildren: number): void {
         if (numberOfChildren < room.childAges.length)
             room.childAges.pop();
         if (numberOfChildren > room.childAges.length)
             room.childAges.push(6);
+        this.updateOccupancy();
+    }
+
+    updateOccupancy(): void {
+        this.totalNumberOfAdults = _.sumBy(this.request.rooms, "numberOfAdults");
+        this.totalNumberOfChildren = _.sumBy(this.request.rooms, "numberOfChildren");
     }
 
     search(): void {
