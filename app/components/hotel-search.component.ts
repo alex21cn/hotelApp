@@ -4,9 +4,9 @@ import { Observable }         from "rxjs/Observable";
 import * as _ from "lodash";
 import { HotelService } from "../services/hotel.service";
 import { UserService } from "../services/user.service";
-import { City } from "../classes/city.class";
+import { City } from "../models/city.interface";
 import { CitySearchComponent } from "./city-search.component"
-import {SearchRequest, RequestRoom} from "../classes/search-request.class";
+import {SearchRequest, RequestRoom} from "../models/search-request.class";
 import { CompleterService, CompleterData } from 'ng2-completer';
 
 @Component({

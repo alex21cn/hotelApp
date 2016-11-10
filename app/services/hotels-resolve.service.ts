@@ -2,8 +2,8 @@
 import { Router, Resolve, ActivatedRouteSnapshot } from "@angular/router";
 import { HotelService } from "./hotel.service";
 import { UserService } from "./user.service";
-import { Hotel } from "../classes/hotel.class";
-import {SearchRequest} from "../classes/search-request.class";
+import { Hotel } from "../models/hotel.class";
+import {SearchRequest} from "../models/search-request.class";
 
 @Injectable()
 export class HotelsResolveService implements Resolve<Hotel[]>{

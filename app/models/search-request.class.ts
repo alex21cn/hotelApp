@@ -1,4 +1,4 @@
-﻿import {City} from "./city.class"
+﻿import {City} from "./city.interface"
 
 export class SearchRequest {
     id: number = 0;

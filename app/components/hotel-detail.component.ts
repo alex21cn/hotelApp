@@ -3,8 +3,8 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import { Location }               from "@angular/common";
 import { Observable }         from "rxjs/Observable";
 import { HotelService } from "../services/hotel.service";
-import {SearchRequest} from "../classes/search-request.class";
-import { Hotel } from "../classes/hotel.class";
+import {SearchRequest} from "../models/search-request.class";
+import { Hotel } from "../models/hotel.class";
 
 @Component({
     selector: "hotel-detail",

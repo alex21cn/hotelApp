@@ -3,7 +3,7 @@ import { Router }            from '@angular/router';
 import { Observable }        from 'rxjs/Observable';
 import { Subject }           from 'rxjs/Subject';
 import { HotelService } from "../services/hotel.service";
-import { City } from '../classes/city.class';
+import { City } from '../models/city.interface';
 @Component({
     moduleId: module.id,
     selector: 'city-search',

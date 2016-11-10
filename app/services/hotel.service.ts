@@ -3,9 +3,9 @@ import { Http, Headers, Response, URLSearchParams  } from "@angular/http";
 import { Observable }     from "rxjs/Observable";
 import { Subject }        from "rxjs/Subject";
 import "rxjs/add/operator/toPromise";
-import { SearchRequest } from "../classes/search-request.class";
-import { Hotel } from "../classes/hotel.class";
-import {City}  from "../classes/city.class";
+import { SearchRequest } from "../models/search-request.class";
+import { Hotel } from "../models/hotel.class";
+import {City}  from "../models/city.interface";
 
 @Injectable()
 export class HotelService {

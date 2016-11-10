@@ -5,8 +5,8 @@ import { Observable }         from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import { HotelService } from "../services/hotel.service";
 import { UserService } from "../services/user.service";
-import {SearchRequest} from "../classes/search-request.class";
-import { Hotel } from "../classes/hotel.class";
+import {SearchRequest} from "../models/search-request.class";
+import { Hotel } from "../models/hotel.class";
 
 @Component({
     selector: "hotel-list",

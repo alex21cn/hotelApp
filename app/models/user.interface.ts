@@ -1,4 +1,4 @@
-﻿import {Address} from "./address.class";
+﻿import {Address} from "./address.interface";
 
 export interface User {
     id: number;

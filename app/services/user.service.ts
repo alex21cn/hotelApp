@@ -5,8 +5,8 @@ import { Subject }        from "rxjs/Subject";
 import "rxjs/add/operator/toPromise";
 import * as _ from "lodash";
 import { LocalStorageService } from 'angular-2-local-storage';
-import { SearchRequest } from "../classes/search-request.class";
-import { User } from "../classes/user.class";
+import { SearchRequest } from "../models/search-request.class";
+import { User } from "../models/user.interface";
 
 @Injectable()
 export class UserService {

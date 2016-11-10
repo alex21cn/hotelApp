@@ -1,8 +1,8 @@
 ﻿import { Injectable }     from "@angular/core";
 import { Router, Resolve, ActivatedRouteSnapshot } from "@angular/router";
 import { HotelService } from "./hotel.service";
-import { Hotel } from "../classes/hotel.class";
-import {City}  from "../classes/city.class";
+import { Hotel } from "../models/hotel.class";
+import {City}  from "../models/city.interface";
 
 @Injectable()
 export class HotelResolveService implements Resolve<Hotel>{
