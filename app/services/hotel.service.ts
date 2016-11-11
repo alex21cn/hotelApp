@@ -21,14 +21,14 @@ export class HotelService {
         //this.request = { city: "", country: "", checkInDate: new Date(), checkOutDate: new Date(),numberOfAdults: 2, numberOfChildren:0, childAges:null };
     }
 
-    getHotels(request: SearchRequest): Promise<Hotel[]> {
-        let url = `${this.hotelBaseUrl}/search/?id=${request.id}&ct=${request.city}&cu=${request.country}&ci=${request.checkInDate}&co=${request.checkOutDate}&rn=${request.rooms.length}`.replace(/-/g, "");
-        for (let i = 0; i < request.rooms.length; i++) {
-            url += `&r${i + 1}=${request.rooms[i].numberOfAdults}_${request.rooms[i].numberOfChildren}`;
-            for (var j = 0; j < request.rooms[i].childAges.length; j++) {
-                url += `_${request.rooms[i].childAges[j]}`;
-            }
-        }
+    getHotels(request: SearchRequest): Observable<Hotel[]> {
+        //let url = `${this.hotelBaseUrl}/search/?id=${request.id}&ct=${request.city}&cu=${request.city.country}&ci=${request.checkInDate}&co=${request.checkOutDate}&rn=${request.rooms.length}`.replace(/-/g, "");
+        //for (let i = 0; i < request.rooms.length; i++) {
+        //    url += `&r${i + 1}=${request.rooms[i].numberOfAdults}_${request.rooms[i].numberOfChildren}`;
+        //    for (var j = 0; j < request.rooms[i].childAges.length; j++) {
+        //        url += `_${request.rooms[i].childAges[j]}`;
+        //    }
+        //}
         //let params = new URLSearchParams();
         //params.set('key', '[API_KEY]');
         //params.set('location', 'texas');
@@ -36,29 +36,24 @@ export class HotelService {
         //params.set('format', 'json');
         //params.set('callback', 'JSONP_CALLBACK');
         let url = "api/hotels";
-        return this.httpGet(url).then(
-            response => this.hotels = (response.json().hotels || response.json().data) as Hotel[]
-        );
+        return this.httpGet(url).map(response => this.hotels = (response.json().hotels || response.json().data) as Hotel[]);
     }
 
-    getHotelDetail(id: number | string): Promise<Hotel> {
+    getHotelDetail(id: number | string): Observable<Hotel> {
         //return this.getHotels(null).then(hotels => hotels.find(hotel => hotel.id === +id));
         //var url = `${this.hotelBaseUrl}/detail?hotelId=${id}`;
         var url = "api/detail";
-        return this.httpGet(url).then(response => response.json().hotel || response.json().data);
+        return this.httpGet(url).map(response => response.json().hotel || response.json().data);
     }
 
-    getCities(): Promise<City[]> {
+    getCities(): Observable<City[]> {
         //var url = `${this.hotelBaseUrl}/cities/`;
-        return this.httpGet("api/cities")
-            .then(
-            response => this.cities = response.json().data as City[]
-            );
+        return this.httpGet("api/cities").map(response => this.cities = response.json().data as City[]);
 
     }
 
-    private httpGet(url: string): Promise<any> {
-        return this.http.get(url).toPromise().then(response => response).catch(this.handleError);
+    private httpGet(url: string): Observable<any> {
+        return this.http.get(url).map(response => response).catch(this.handleError);
     }
 
     private handleError(error: any): Promise<any> {

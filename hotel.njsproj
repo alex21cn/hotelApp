@@ -37,7 +37,6 @@
     <Content Include="app\templates\app.template.html" />
     <Content Include="app\templates\hotel-detail.template.html" />
     <Content Include="app\templates\hotel-list.template.html" />
-    <Content Include="app\templates\city-search.template.html" />
     <Content Include="app\templates\hotel-search.template.html" />
     <Content Include="asset\css\app.component.css" />
     <Content Include="asset\css\app.theme.scss" />
@@ -52,7 +51,6 @@
     <TypeScriptCompile Include="app\models\user.interface.ts" />
     <TypeScriptCompile Include="app\models\hotel.class.ts" />
     <TypeScriptCompile Include="app\components\app.component.ts" />
-    <TypeScriptCompile Include="app\components\city-search.component.ts" />
     <TypeScriptCompile Include="app\components\hotel-detail.component.ts" />
     <TypeScriptCompile Include="app\components\hotel-list.component.ts" />
     <TypeScriptCompile Include="app\components\hotel-search.component.ts" />

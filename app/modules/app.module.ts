@@ -13,7 +13,6 @@ import { MockHotelService }  from "../../mock/mock-hotel.service";
 import { routing, appRoutingProviders } from "../routing";
 import { AppComponent }  from "../components/app.component";
 import { HotelSearchComponent } from "../components/hotel-search.component"
-import { CitySearchComponent } from "../components/city-search.component"
 import { HotelListComponent  } from "../components/hotel-list.component"
 import { HotelDetailComponent  } from "../components/hotel-detail.component"
 import { HotelService } from "../services/hotel.service"
@@ -41,7 +40,6 @@ let localStorageServiceConfig = {
     declarations: [
         AppComponent,
         HotelSearchComponent,
-        CitySearchComponent,
         HotelListComponent,
         HotelDetailComponent
     ],

@@ -3,10 +3,11 @@ import { Http, Headers, Response } from "@angular/http";
 import { Observable }     from "rxjs/Observable";
 import { Subject }        from "rxjs/Subject";
 import "rxjs/add/operator/toPromise";
-import * as _ from "lodash";
+//import * as _ from "lodash";
 import { LocalStorageService } from 'angular-2-local-storage';
 import { SearchRequest } from "../models/search-request.class";
 import { User } from "../models/user.interface";
+let _ = require("lodash");
 
 @Injectable()
 export class UserService {
@@ -29,7 +30,7 @@ export class UserService {
 
     getSearch(searchId: number): SearchRequest {
         let searches = <SearchRequest[]>this.localStorageService.get("user_searchs");
-        let search = <SearchRequest>_.find(searches, s => (s.id === searchId));
+        let search = <SearchRequest>_.find(searches, (s:any) => (s.id === searchId));
         return search;
     }
 }

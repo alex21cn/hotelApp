@@ -1,13 +1,14 @@
 ﻿import { Component, OnInit } from "@angular/core";
 import { Router, NavigationExtras } from "@angular/router";
+//import { Rx }         from "rxjs/Rx";
 import { Observable }         from "rxjs/Observable";
-import * as _ from "lodash";
+//import * as _ from "lodash";
 import { HotelService } from "../services/hotel.service";
 import { UserService } from "../services/user.service";
 import { City } from "../models/city.interface";
-import { CitySearchComponent } from "./city-search.component"
 import {SearchRequest, RequestRoom} from "../models/search-request.class";
-import { CompleterService, CompleterData } from 'ng2-completer';
+import { CompleterService, CompleterData } from "ng2-completer";
+let _ = require("lodash");
 
 @Component({
     selector: "hotel-search",
@@ -27,7 +28,7 @@ export class HotelSearchComponent implements OnInit {
     private totalNumberOfChildren: number;
 
     constructor(private router: Router, private service: HotelService, private user: UserService, private completerService: CompleterService) {
-        this.service.getCities().then(cities => this.cityService = completerService.local(cities, "name,country,airportCode", "name,country,airportCode"));
+        this.service.getCities().subscribe(cities => this.cityService = completerService.local(cities, "name,country,airportCode", "name,country,airportCode"));
     }
 
     ngOnInit(): void {
@@ -37,11 +38,7 @@ export class HotelSearchComponent implements OnInit {
         this.request.checkInDate = new Date();
         this.request.checkOutDate = new Date();
         this.numberOfRooms = 1;
-        this.observableRequest = new Observable(o => o.next(this.request));
-        this.observableRequest.subscribe(value => {
-            this.updateOccupancy();
-        });
-
+        this.observableRequest = Observable.create((o:any) => o.next(1));
     }
 
     addOrRemoveRoom(numberOfRooms: number): void {
@@ -51,6 +48,9 @@ export class HotelSearchComponent implements OnInit {
             this.request.rooms.push({ numberOfAdults: 2, numberOfChildren: 0, childAges: [] });
         this.updateOccupancy();
         //this.observableRequest.publish(this.request);
+        this.observableRequest.subscribe(value => {
+            console.log(value);
+        });
     }
 
     addOrRemoveChild(room: RequestRoom, numberOfChildren: number): void {

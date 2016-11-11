@@ -1,4 +1,4 @@
-﻿import { City } from "../app/classes/city.class";
+﻿import { City } from "../app/models/city.interface";
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 export class MockHotelService implements InMemoryDbService {

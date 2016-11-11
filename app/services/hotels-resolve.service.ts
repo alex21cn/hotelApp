@@ -1,5 +1,6 @@
 ﻿import { Injectable }     from "@angular/core";
 import { Router, Resolve, ActivatedRouteSnapshot } from "@angular/router";
+import { Observable }         from "rxjs/Observable";
 import { HotelService } from "./hotel.service";
 import { UserService } from "./user.service";
 import { Hotel } from "../models/hotel.class";
@@ -14,7 +15,7 @@ export class HotelsResolveService implements Resolve<Hotel[]>{
         let searchId = + route.queryParams["searchId"];
         let request = this.user.getSearch(searchId);
         if (!request) return false;
-        return [
+        let hotels = [
             {
                 id: 1,
                 name: "Four Season",
@@ -34,14 +35,14 @@ export class HotelsResolveService implements Resolve<Hotel[]>{
                 image: ""
             }
         ];
-
-        return this.service.getHotels(request).then(hotels => {
-            if (hotels) {
-                return hotels;
-            } else {
-                this.router.navigate(["/index"]);
-                return false;
-            }
-        });
+return Observable.create((o: any) => o.next(hotels));
+        // return this.service.getHotels(request).map(hotels => {
+        //     if (hotels) {
+        //         return hotels;
+        //     } else {
+        //         this.router.navigate(["/index"]);
+        //         return false;
+        //     }
+        // });
     }
 }
