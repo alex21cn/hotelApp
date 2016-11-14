@@ -38,7 +38,11 @@ export class HotelSearchComponent implements OnInit {
         this.request.checkInDate = new Date();
         this.request.checkOutDate = new Date();
         this.numberOfRooms = 1;
-        this.observableRequest = Observable.create((o:any) => o.next(1));
+        this.observableRequest = Observable.create((observable:any) =>{
+            this.updateOccupancy(); 
+            console.log(observable);
+        });
+        this.observableRequest.subscribe();
     }
 
     addOrRemoveRoom(numberOfRooms: number): void {
@@ -46,8 +50,7 @@ export class HotelSearchComponent implements OnInit {
             this.request.rooms.pop();
         if (numberOfRooms > this.request.rooms.length)
             this.request.rooms.push({ numberOfAdults: 2, numberOfChildren: 0, childAges: [] });
-        this.updateOccupancy();
-        //this.observableRequest.publish(this.request);
+//        this.updateOccupancy();
         this.observableRequest.subscribe(value => {
             console.log(value);
         });
@@ -58,7 +61,10 @@ export class HotelSearchComponent implements OnInit {
             room.childAges.pop();
         if (numberOfChildren > room.childAges.length)
             room.childAges.push(6);
-        this.updateOccupancy();
+        //this.updateOccupancy();
+        this.observableRequest.subscribe(value => {
+            console.log(value);
+        });        
     }
 
     updateOccupancy(): void {
