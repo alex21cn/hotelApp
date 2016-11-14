@@ -36,7 +36,9 @@ export class HotelService {
         //params.set('format', 'json');
         //params.set('callback', 'JSONP_CALLBACK');
         let url = "api/hotels";
-        return this.httpGet(url).map(response => this.hotels = (response.json().hotels || response.json().data) as Hotel[]);
+        return this.httpGet(url).map(response => 
+            this.hotels = (response.json().hotels || response.json().data.hotels || response.json().data) as Hotel[]
+        );
     }
 
     getHotelDetail(id: number | string): Observable<Hotel> {

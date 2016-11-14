@@ -15,34 +15,34 @@ export class HotelsResolveService implements Resolve<Hotel[]>{
         let searchId = + route.queryParams["searchId"];
         let request = this.user.getSearch(searchId);
         if (!request) return false;
-        let hotels = [
-            {
-                id: 1,
-                name: "Four Season",
-                starrate: 4,
-                description: "Four Season",
-                address: "abc street, city",
-                price: 123.69,
-                image: ""
-            },
-            {
-                id: 2,
-                name: "FairMount",
-                starrate: 5,
-                description: "FairMount",
-                address: "abc street, city",
-                price: 560.00,
-                image: ""
+//         let hotels = [
+//             {
+//                 id: 1,
+//                 name: "Four Season",
+//                 starrate: 4,
+//                 description: "Four Season",
+//                 address: "abc street, city",
+//                 price: 123.69,
+//                 image: ""
+//             },
+//             {
+//                 id: 2,
+//                 name: "FairMount",
+//                 starrate: 5,
+//                 description: "FairMount",
+//                 address: "abc street, city",
+//                 price: 560.00,
+//                 image: ""
+//             }
+//         ];
+// return Observable.of(hotels);
+        return this.service.getHotels(request).map(hotels => {
+            if (hotels) {
+                return hotels;
+            } else {
+                this.router.navigate(["/index"]);
+                return false;
             }
-        ];
-return Observable.create((o: any) => o.next(hotels));
-        // return this.service.getHotels(request).map(hotels => {
-        //     if (hotels) {
-        //         return hotels;
-        //     } else {
-        //         this.router.navigate(["/index"]);
-        //         return false;
-        //     }
-        // });
+        });
     }
 }
