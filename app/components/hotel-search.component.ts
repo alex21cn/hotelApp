@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from "@angular/core";
 import { Router, NavigationExtras } from "@angular/router";
-//import { Rx }         from "rxjs/Rx";
+import * as Rx from "rxjs/Rx";
 import { Observable }         from "rxjs/Observable";
 //import * as _ from "lodash";
 import { HotelService } from "../services/hotel.service";
@@ -26,6 +26,7 @@ export class HotelSearchComponent implements OnInit {
     private numberOfRooms: number;
     private totalNumberOfAdults: number;
     private totalNumberOfChildren: number;
+    private subject: any;
 
     constructor(private router: Router, private service: HotelService, private user: UserService, private completerService: CompleterService) {
         this.service.getCities().subscribe(cities => this.cityService = completerService.local(cities, "name,country,airportCode", "name,country,airportCode"));
@@ -38,11 +39,19 @@ export class HotelSearchComponent implements OnInit {
         this.request.checkInDate = new Date();
         this.request.checkOutDate = new Date();
         this.numberOfRooms = 1;
-        this.observableRequest = Observable.create((observable:any) =>{
+        // this.observableRequest = Observable.create((observable:any) =>{
+        //     this.updateOccupancy(); 
+        //     console.log(observable);
+        // });
+        //this.observableRequest.subscribe();
+        this.subject = new Rx.Subject();
+        this.subject.subscribe(
+            (observable:any) => {
             this.updateOccupancy(); 
             console.log(observable);
-        });
-        this.observableRequest.subscribe();
+            }
+        );
+        this.subject.next();
     }
 
     addOrRemoveRoom(numberOfRooms: number): void {
@@ -51,9 +60,11 @@ export class HotelSearchComponent implements OnInit {
         if (numberOfRooms > this.request.rooms.length)
             this.request.rooms.push({ numberOfAdults: 2, numberOfChildren: 0, childAges: [] });
 //        this.updateOccupancy();
-        this.observableRequest.subscribe(value => {
-            console.log(value);
-        });
+        // this.observableRequest.subscribe(value => {
+        //     //never hits this line
+        //     console.log(value);
+        // });
+        this.subject.next();
     }
 
     addOrRemoveChild(room: RequestRoom, numberOfChildren: number): void {
@@ -62,9 +73,10 @@ export class HotelSearchComponent implements OnInit {
         if (numberOfChildren > room.childAges.length)
             room.childAges.push(6);
         //this.updateOccupancy();
-        this.observableRequest.subscribe(value => {
-            console.log(value);
-        });        
+        // this.observableRequest.subscribe(value => {
+        //     console.log(value);
+        // });
+        this.subject.next();
     }
 
     updateOccupancy(): void {
