@@ -58,6 +58,7 @@
   "devDependencies": {
     "@types/chai": "^3.4.34",
     "@types/hammerjs": "^2.0.33",
+    "@types/jasmine": "^2.5.38",
     "angular-2-local-storage": "0.0.19",
     "concurrently": "^2.2.0",
     "jasmine": "^2.5.2",

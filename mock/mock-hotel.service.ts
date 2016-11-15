@@ -7,7 +7,7 @@ export class MockHotelService implements InMemoryDbService {
             { name: "Toronto", airportCode: "YYZ", country: "Canada", latitude: 0, longitude: 0 },
             { name: "Owatta", airportCode: "YOW", country: "Canada", latitude: 0, longitude: 0 },
             { name: "Montreal", airportCode: "YYZ", country: "Canada", latitude: 0, longitude: 0 },
-            { name: "Vancouver", airportCode: "YYZ", country: "Canada", latitude: 0, longitude: 0 },
+            { name: "Vancouver", airportCode: "YVR", country: "Canada", latitude: 0, longitude: 0 },
             { name: "New York", airportCode: "YYZ", country: "United States", latitude: 0, longitude: 0 },
             { name: "Washington D.C", airportCode: "YYZ", country: "United States", latitude: 0, longitude: 0 },
             { name: "Chicago", airportCode: "YYZ", country: "United States", latitude: 0, longitude: 0 },
