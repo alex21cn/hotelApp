@@ -39,11 +39,11 @@ export class HotelSearchComponent implements OnInit {
         this.request.checkInDate = new Date();
         this.request.checkOutDate = new Date();
         this.numberOfRooms = 1;
-        // this.observableRequest = Observable.create((observable:any) =>{
-        //     this.updateOccupancy(); 
-        //     console.log(observable);
-        // });
-        //this.observableRequest.subscribe();
+        this.observableRequest = Observable.create((observable:any) =>{
+            this.updateOccupancy(); 
+            console.log(observable);
+        });
+        this.observableRequest.subscribe();
         this.subject = new Rx.Subject();
         this.subject.subscribe(
             (observable:any) => {
@@ -51,7 +51,7 @@ export class HotelSearchComponent implements OnInit {
             console.log(observable);
             }
         );
-        this.subject.next();
+        this.subject.next(this.request);
     }
 
     addOrRemoveRoom(numberOfRooms: number): void {
